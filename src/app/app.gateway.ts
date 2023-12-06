@@ -19,7 +19,6 @@ export class AppGateway
   @SubscribeMessage('messageServer')
   handleMessage(client: Socket, payload: string): void {
     this.server.emit('msgToClient', payload, client.id);
-    console.log(payload);
   }
 
   afterInit() {

@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { hashSync } from 'bcryptjs';
 import { Transform } from 'class-transformer';
 import {
@@ -9,19 +10,40 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
+  @ApiProperty({
+    description: 'Nome do usuário',
+    type: String,
+    default: 'Marcio Gabriel',
+  })
   @IsString({ message: 'O nome deve ser uma string' })
   @IsNotEmpty({ message: 'O nome não deve ser vazio' })
   name: string;
 
+  @ApiProperty({
+    description: 'Imagem do usuario ',
+    type: String,
+    default:
+      'https://cdn.pixabay.com/photo/2015/10/24/11/09/drop-1004250_1280.jpg',
+  })
   @IsString({ message: 'A imagem deve ser uma string' })
   @IsNotEmpty({ message: 'A imagem não deve ser vazio' })
   @IsOptional()
   image: string;
 
+  @ApiProperty({
+    description: 'Email do usuário',
+    type: String,
+    default: 'marcio@mail.com',
+  })
   @IsEmail({}, { message: 'Deve ser um email valido ' })
   @IsNotEmpty({ message: 'Email não deve ser vazio' })
   email: string;
 
+  @ApiProperty({
+    description: 'Senha do usuário',
+    type: String,
+    default: '12345678',
+  })
   @IsString({ message: 'A senha deve ser uma string' })
   @IsNotEmpty({ message: 'A senha não deve ser vazio' })
   @MinLength(8, { message: 'A senha deve ter pelo menos 8 caracteres' })
